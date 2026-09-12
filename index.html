@@ -137,6 +137,56 @@
         <summary class="label">Projects</summary>
 
         <article class="item">
+          <img class="logo" src="./assets/safekeeping.svg" alt="" />
+          <div class="item-body">
+            <div class="item-head">
+              <div>
+                <h3>
+                  <a href="https://safekeeping.lol" target="_blank" rel="noreferrer">
+                    SafeKeeping
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </h3>
+                <p>Personal file vault</p>
+              </div>
+              <p class="when">2026</p>
+            </div>
+            <div class="story">
+              <p class="story-label">Why</p>
+              <p class="writeup">
+                I wanted a vault I could run myself and invite people I trust
+                into — not someone else’s cloud, and not a pile of object-storage
+                APIs still waiting for a UI. Personal files had to be sealed on
+                the device before they hit disk. Shared folders had to stay
+                usable by more than one person, so they could not use the same
+                lock. And the disk is small, so every signup cannot just upload.
+              </p>
+              <p class="story-label">What I did</p>
+              <p class="writeup">
+                I designed and shipped SafeKeeping at
+                <a href="https://safekeeping.lol" target="_blank" rel="noreferrer">safekeeping.lol</a>
+                — a Go API and a single-page vault on Railway, one process and
+                one persistent disk. Personal uploads use AES-GCM in the
+                browser with a wrapped data key, so the host stores ciphertext
+                and can see names and sizes, not the bytes. Shared folders,
+                24-hour share links, and in-vault conversion sit beside that.
+                New accounts wait for me to approve them before they can write.
+                Railway Hobby blocks outbound SMTP, so mail goes through Resend
+                over HTTPS. I handled DNS, the custom domain, and kept owner
+                credentials in host env so they never landed in git.
+              </p>
+              <p class="story-label">What I learned</p>
+              <ul>
+                <li>An honest encryption model: personal files are sealed in the browser; shared folders are not, because E2E and collaboration fight each other. Login still hits the server — this is not zero-knowledge</li>
+                <li>Shipping on a small host: content-addressed blobs on disk, SQLite for the catalog, a volume that restarts keep, and Resend when SMTP is blocked</li>
+                <li>Access control as a product constraint — unapproved users can finish signup and open shared links, but they cannot upload until I accept them</li>
+                <li>Go, chi, SQLite, Web Crypto, JWT, Railway, and DNS, end to end, with no frontend framework and no S3</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="item">
           <img class="logo" src="./assets/sparkbox.png" alt="" />
           <div class="item-body">
             <div class="item-head">

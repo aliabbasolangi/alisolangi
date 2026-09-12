@@ -304,8 +304,14 @@ h1 {
   gap: 0.3rem;
 }
 
-.item-head h3 a:hover {
+.item-head h3 a:hover,
+.writeup a:hover {
   color: #0f766e;
+}
+
+.writeup a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .item-head p,
